@@ -16,21 +16,25 @@ class pe_puppet_installer ($daemon = false, $cron = true) {
     $cron_ensure = absent
   }
 
+  notify {$::fact_is_puppetmaster:}
+  case $::fact_is_puppetmaster {
 
-
-  if ! $::fact_is_puppetmaster {
+    'false': {
 
     package { 'integralis-puppet-agent-installer':
       ensure => present,
     } ->
     service { 'pe-puppet':
-      enable => $service_enable,
-      ensure => $service_ensure,
+      enable    => $service_enable,
+      ensure    => $service_ensure,
+      hasstatus => false,
+      pattern   => '/\/opt\/puppet\/bin/puppet\ agent/',
     } ->
     cron { 'pe-puppet-agent':
       ensure  => present,
       command => '/opt/puppet/bin/puppet agent -t --noop --logdest syslog 2>&1 /dev/null',
       minute  => [$pe_puppet_installer::minute,$pe_puppet_installer::minute_two]
+    }
     }
   }
 }
