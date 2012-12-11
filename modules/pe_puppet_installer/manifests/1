@@ -25,7 +25,7 @@ class pe_puppet_installer ($daemon = false, $cron = true) {
       enable    => $service_enable,
       ensure    => $service_ensure,
       hasstatus => false,
-      pattern   => "/opt/puppet/bin/puppet agent",
+      pattern   => '/\/opt\/puppet\/bin/puppet\ agent/',
     } ->
     cron { 'pe-puppet-agent':
       ensure  => present,
