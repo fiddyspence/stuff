@@ -1,7 +1,7 @@
 Facter.add("location") do
   hostname = Facter(:fqdn).split('.')
   setcode do
-    hostname[1]
+    hostname[1] if hostname[1] =~ /^(a|b)$/
   end
 end
 Facter.add("environment") do
