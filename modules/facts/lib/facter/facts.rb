@@ -1,6 +1,10 @@
 Facter.add("location") do
   setcode do
-     Facter::Util::Resolution.exec("cat /etc/location")
+    if Facter.value(:fqdn) =~ /#{Facter.value(:hostname)}\.a/
+      "a"
+    elsif Facter.value(:fqdn) =~ /#{Facter.value(:hostname)}\.b/
+      "b"
+    end
   end
 end
 Facter.add("environment") do
