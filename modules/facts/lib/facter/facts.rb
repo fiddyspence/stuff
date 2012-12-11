@@ -1,10 +1,7 @@
 Facter.add("location") do
+  hostname = Facter(:fqdn).split('.')
   setcode do
-    if Facter.value(:fqdn) =~ /#{Facter.value(:hostname)}\.a/
-      "a"
-    elsif Facter.value(:fqdn) =~ /#{Facter.value(:hostname)}\.b/
-      "b"
-    end
+    hostname[1]
   end
 end
 Facter.add("environment") do
