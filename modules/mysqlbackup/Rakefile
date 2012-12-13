@@ -1,0 +1,18 @@
+require 'rake'
+require 'fileutils'
+
+begin
+  require 'rspec/core/rake_task'
+  HAVE_RSPEC = true
+rescue LoadError
+  HAVE_RSPEC = false
+end
+
+task :default => [:spec]
+
+if HAVE_RSPEC then
+  desc 'Run all module spec tests (Requires rspec-puppet gem)'
+  task :spec do
+    system 'rspec --format d spec/'
+  end
+end
