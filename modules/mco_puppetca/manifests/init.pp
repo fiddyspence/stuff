@@ -6,6 +6,7 @@ class mco_puppetca {
     group  => 'root',
     mode   => '0644',
     source => "puppet:///modules/${module_name}/puppetca.rb",
+    notify => Service['pe-mcollective']
   }
   file { '/opt/puppet/libexec/mcollective/mcollective/agent/puppetca.ddl':
     ensure => present,
@@ -13,6 +14,7 @@ class mco_puppetca {
     group  => 'root',
     mode   => '0644',
     source => "puppet:///modules/${module_name}/puppetca.ddl",
+    notify => Service['pe-mcollective']
   }
 
   # this section to distribute the mcollective client configuration for ${provisioning} to use

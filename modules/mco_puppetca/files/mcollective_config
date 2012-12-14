@@ -1,0 +1,30 @@
+# This file managed by Puppet 2.7.19 (Puppet Enterprise 2.6.1)
+topicprefix     = /topic/
+main_collective = mcollective
+collectives     = mcollective
+libdir          = /opt/puppet/libexec/mcollective/
+logfile         = /var/lib/peadmin/.mcollective.d/client.log
+loglevel        = info
+
+# Security Provider in active use
+securityprovider = psk
+# AES Security Provider Configuration
+plugin.aespe.client_private = /var/lib/peadmin/.mcollective.d/peadmin-private.pem
+plugin.aespe.client_public  = /var/lib/peadmin/.mcollective.d/peadmin-public.pem
+plugin.aespe.serializer     = yaml
+plugin.aespe.maximum_age    = 60
+# PSK Security Provider Configuration
+plugin.psk = 52f4cdc60d286d93b38f4cd21b663418f3123a78
+
+connector = stomp
+plugin.stomp.pool.size = 1
+plugin.stomp.pool.host1 = puppet
+plugin.stomp.pool.port1 = 61613
+plugin.stomp.pool.user1 = mcollective
+plugin.stomp.pool.password1 = str1bzcZ68k6j6lZZXUo
+plugin.stomp.pool.ssl1 = true
+plugin.stomp.base64 = true
+
+# Facts
+factsource = yaml
+plugin.yaml = /etc/puppetlabs/mcollective/facts.yaml
